@@ -9,21 +9,19 @@ city.addEventListener('click', innerText);
 city.addEventListener('keypress', setCity);
 city.addEventListener('blur', setCity);
 
-
-
-    let exc = [];
+let exc = [];
     
-
-    function randIntExcep(min, max, exp) {
-        var n, exp = Array.isArray(exp) ? exp : [(isNaN(exp) ? min-1 : exp)];
-      while(true){
-          n = Math.floor(Math.random() * (max - min + 1)) + min;
-          if(exp.indexOf(n) < 0) {
-            exc.push(n);
-             return n;
-          }   
-      }
+function randIntExcep(min, max, exp) {
+  let n;
+  exp = Array.isArray(exp) ? exp : [(isNaN(exp) ? min-1 : exp)];
+  while(true){
+      n = Math.floor(Math.random() * (max - min + 1)) + min;
+      if(exp.indexOf(n) < 0) {
+        exc.push(n);
+         return n;
+      }   
   }
+}
 
 let images = []
     images[0] = `./assets/images/morning/${randIntExcep(1, 20, exc)}.jpg`;
