@@ -268,15 +268,26 @@ const blockquote = document.querySelector("blockquote");
 const figcaption = document.querySelector("figcaption");
 const btn = document.querySelector(".btn");
 
-async function getQuote() {
-  const url = `https://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=ru`;
-  let res = await fetch(url);
-  let data = await res.json();
-  blockquote.textContent = data.quote.quoteText;
-  figcaption.textContent = data.quote.quoteAuthor;
+function randomInteger(min, max) {
+  const rand = min + Math.random() * (max + 1 - min);
+  return Math.floor(rand);
 }
 
-document.addEventListener("load", getQuote());
+let quotes = [];
+
+async function loatQuotes() {
+  const url = `https://type.fit/api/quotes`;
+  const res = await fetch(url);
+  quotes = await res.json();
+}
+
+function getQuote() {
+  let randomQuoteNumber = randomInteger(0, 200);
+  blockquote.textContent = quotes[randomQuoteNumber].text;
+  figcaption.textContent = quotes[randomQuoteNumber].author;
+}
+
+document.addEventListener("load", loatQuotes());
 btn.addEventListener("click", getQuote);
 
 async function getWeather() {
